@@ -1,0 +1,349 @@
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{esint}
+\usepackage{blindtext}
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{bib.bib}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{cool}
+\usepackage{thmtools}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{pgfpages}
+\usepackage{tocloft}
+\graphicspath{ }						%path to an image
+
+\usepackage{titlesec}
+\titleformat{\section}
+  {\sffamily\Large\bfseries}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\sffamily\large\bfseries}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\sffamily\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+\renewcommand{\abstractname}{\sffamily\Large Abstract}
+  % Configuring title format to use sans-serif
+\makeatletter
+\renewcommand{\@maketitle}{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\sffamily\LARGE\bfseries \@title \par}%
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \sffamily \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\sffamily\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\makeatother
+
+
+% Table of contents formatting
+\renewcommand{\cftsecfont}{\sffamily\bfseries}
+\renewcommand{\cftsubsecfont}{\sffamily}
+\renewcommand{\cftsubsubsecfont}{\sffamily}
+\renewcommand{\cftsecpagefont}{\sffamily}
+\renewcommand{\cftsubsecpagefont}{\sffamily}
+\renewcommand{\cftsubsubsecpagefont}{\sffamily}
+\renewcommand{\contentsname}{\sffamily Contents}
+
+
+\usepackage[skins,xparse,breakable]{tcolorbox}
+\usepackage{mdframed}
+
+
+
+%-------- sexy font ------------%
+%\usepackage{libertine}
+%\usepackage{libertinust1math}
+
+%\usepackage{mlmodern}				% very nice and classic
+%\usepackage[utopia]{mathdesign}
+%\usepackage[T1]{fontenc}
+
+
+%\usepackage{mlmodern}
+%\usepackage{tgtermes} 				%times new roman
+%\usepackage{eulervm}
+
+%\usepackage{sansmathfonts}
+\usepackage[T1]{fontenc}
+%\usepackage{eulervm}
+%\renewcommand*\familydefault{\sfdefault} 
+%-------- sexy font ------------%
+
+
+
+% Problem Styles
+%====================================================================%
+
+%\@ifclassloaded{beamer}{
+	% Use beamer's theorem environments
+%}{
+	% Define your own theorem environments for non-beamer documents
+	%\newtheorem{problem}{Problem}
+	%\theoremstyle{definition}
+	%\newtheorem{theorem}{Theorem}
+	%\newtheorem{lemma}{Lemma}
+	%\newtheorem{proposition}{Proposition}
+	%\newtheorem{fact}{Fact}
+	%\newtheorem{definition}{Definition}
+	%\newtheorem{example}{Example}
+	%\newtheorem{remark}{Remark}
+%}
+%\newtheorem{manualprobleminner}{Problem}
+
+%\newenvironment{manualproblem}[1]{%
+%	\renewcommand\themanualprobleminner{#1}%
+%	\manualprobleminner
+%}{\endmanualprobleminner}
+
+\newenvironment{subproblem}
+	{\begin{enumerate}[label=\bf \alph*., leftmargin=0pt]}
+	{\end{enumerate}}
+
+%\newtcolorbox{greybox}{enhanced, width=1\linewidth, sharpish corners, colback=white!95!black, breakable, boxrule=0.3pt}
+
+% Define a custom sans-serif theorem style
+\newtheoremstyle{sansserifstyle}
+  {\topsep}                    % Space above
+  {\topsep}                    % Space below
+  {}                  % Body font (sans-serif)
+  {0pt}                        % Indent amount
+  {\sffamily\bfseries}         % Theorem head font (sans-serif, bold)
+  {.}                          % Punctuation after theorem head
+  {5pt plus 1pt minus 1pt}     % Space after theorem head
+  {}                           % Theorem head spec (optional)
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{%
+  \par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \sffamily #1.]%
+}{%
+  \popQED\endtrivlist
+}
+\makeatother
+
+\theoremstyle{sansserifstyle}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{fact}{Fact}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\newtcolorbox{greybox}[1][]{
+	colframe=white,    % Border color
+	colback=white!95!black,    % Background color
+	left=10pt,         % No left padding
+	right=10pt,        % No right padding
+	top=10pt,          % No top padding
+	bottom=10pt,       % No bottom padding
+	boxrule=1pt,      % Thickness of the box border
+	arc=0mm,          % No rounded corners
+	outer arc=2mm,
+	boxsep=0pt,       % Space between the content and the box border
+	breakable,
+	fonttitle=\bfseries
+}
+
+\newtcolorbox{bluebox}[1][]{
+	colframe=white,    % Border color
+	colback=blue!5!white,    % Background color
+	left=10pt,         % No left padding
+	right=10pt,        % No right padding
+	top=10pt,          % No top padding
+	bottom=10pt,       % No bottom padding
+	boxrule=1pt,      % Thickness of the box border
+	arc=0mm,          % No rounded corners
+	outer arc=2mm,
+	boxsep=0pt,       % Space between the content and the box border
+	fonttitle=\bfseries
+}
+
+\newtcolorbox{greenbox}[1][]{
+	colframe=white,    % Border color
+	colback=green!5!white,    % Background color
+	left=10pt,         % No left padding
+	right=10pt,        % No right padding
+	top=10pt,          % No top padding
+	bottom=10pt,       % No bottom padding
+	boxrule=1pt,      % Thickness of the box border
+	arc=0mm,          % No rounded corners
+	outer arc=2mm,
+	boxsep=0pt,       % Space between the content and the box border
+	fonttitle=\bfseries
+}
+
+\newtcolorbox{redbox}[1][]{
+	colframe=white,    % Border color
+	colback=red!5!white,    % Background color
+	left=10pt,         % No left padding
+	right=10pt,        % No right padding
+	top=10pt,          % No top padding
+	bottom=10pt,       % No bottom padding
+	boxrule=1pt,      % Thickness of the box border
+	arc=0mm,          % No rounded corners
+	outer arc=2mm,
+	boxsep=0pt,       % Space between the content and the box border
+	fonttitle=\bfseries
+}
+
+
+
+\newtcolorbox{whitebox}[1][]{colframe=white,    % Border color
+colback=white!100!black,    % Background color
+left=4pt,         % No left padding
+right=4pt,        % No right padding
+top=4pt,          % No top padding
+bottom=4pt,       % No bottom padding
+boxrule=1pt,      % Thickness of the box border
+arc=0mm,          % No rounded corners
+outer arc=0mm,
+boxsep=0pt,       % Space between the content and the box border
+fonttitle=\bfseries
+}
+
+
+\newenvironment{ex}
+	{\begin{greybox}\begin{example}}
+	{\end{example}\end{greybox}}
+
+\newenvironment{rmk}
+{\begin{redbox}\begin{remark}}
+		{\end{remark}\end{redbox}}
+
+\newenvironment{thm}
+	{\begin{bluebox}\begin{theorem}}
+	{\end{theorem}\end{bluebox}}
+
+\newenvironment{defn}
+	{\begin{greybox}\begin{definition}}
+	{\end{definition}\end{greybox}}
+
+\newenvironment{prop}
+	{\begin{bluebox}\begin{proposition}}
+	{\end{proposition}\end{bluebox}}
+
+% Math fonts shortcuts
+%====================================================================%
+
+\newcommand{\N}{\mathbb{N}}                           % Natural numbers
+\newcommand{\Z}{\mathbb{Z}}                           % Integers
+\newcommand{\R}{\mathbb{R}}                           % Real numbers
+\newcommand{\C}{\mathbb{C}}                           % Complex numbers
+\newcommand{\F}{\mathbb{F}}                           % Arbitrary field
+\newcommand{\Q}{\mathbb{Q}}                           % Arbitrary field
+\newcommand{\A}{\mathcal{A}}							% algebra
+\newcommand{\PP}{\mathcal{P}}                         % Partition
+\newcommand{\M}{\mathcal{M}}                         % Mathcal M
+\newcommand{\eL}{\mathcal{L}}                         % Mathcal L
+\newcommand{\T}{\mathcal{T}}                         % Mathcal T
+\newcommand{\U}{\mathcal{U}}                         % Mathcal U\\
+\newcommand{\V}{\mathcal{V}}                         % Mathcal V
+
+\newcommand{\Ex}{\mathbb{E}}                         % expectation
+\newcommand{\ind}{\mathbbm{1}}                         % expectation
+\newcommand{\PR}{\mathbb{P}}                         % expectation
+
+% symbol shortcuts
+%====================================================================%
+
+\newcommand{\lam}{\lambda}
+\newcommand{\imp}{\implies}
+\newcommand{\all}{\forall}
+\newcommand{\exs}{\exists}
+\newcommand{\delt}{\delta}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ra}{\rightarrow}
+
+\newcommand{\ol}{\overline}
+\newcommand{\f}{\frac}
+\newcommand{\lf}{\lfrac}
+\newcommand{\df}{\dfrac}
+
+% bracket shortcuts
+%====================================================================%
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\babs}[1]{\Big|#1\Big|}
+\newcommand{\bound}{\Big|}
+\newcommand{\BB}[1]{\left(#1\right)}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\artanh}{\mathrm{artanh}}
+\newcommand{\Med}{\mathrm{Med}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Corr}{\mathrm{Corr}}
+
+% lin alg shortcuts
+%====================================================================%
+\newcommand{\tr}{\text{tr}}
+\newcommand{\smooth}{$C^\infty$}
+\newcommand{\Range}[1]{\mathrm{range}(#1)}
+\newcommand{\Null}[1]{\mathrm{null}(#1)}
+\newcommand{\lan}{\langle}
+\newcommand{\ran}{\rangle}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\inn}[1]{\lan#1\ran}
+\newcommand{\op}[1]{\operatorname{#1}}
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\vmat}[1]{\begin{vmatrix}#1\end{vmatrix}}
+
+\newcommand{\amogus}{{\bigcap}\kern-0.8em\raisebox{0.3ex}{$\subset$}}
+
+% Probability shortcuts
+%====================================================================%
+
+
+% indentations and formatting
+%====================================================================%
+
+\setlength{\parindent}{0pt}      	% No paragraph indentations
+%\setlength{\parskip}{0.5\baselineskip}
+%\pagestyle{fancy}
+%\fancyhf{}							% fancy header
+
+
+\setcounter{secnumdepth}{2}			% sections are numbered but numbers do not appear
+\setcounter{tocdepth}{2} 			% no subsubsections in toc
+%\bibstyle{ksfh_nat}
+
+% add period after section name
+\usepackage{titlesec}
+
+% \titleformat{\section}[runin]
+% {\normalfont\Large\bfseries}
+% {\thesection.}
+% {1em}
+% {}
+
+% \titleformat{\subsection}[runin]
+% {\normalfont\large\bfseries}
+% {\thesubsection.}
+% {1em}
+% {}
