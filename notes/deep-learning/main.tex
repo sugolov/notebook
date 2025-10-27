@@ -3,18 +3,51 @@
 \usepackage{bm}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsthm}
-\usepackage{notes}
+\usepackage{../../template/notes}
 
-\title{template}
-\author{Anton \& friends}
-\date{September 2025}
+\title{Learning}
+\author{Anton}
+\date{\today}
 
 \begin{document}
 
 \maketitle
 \tableofcontents
 
-\section{Introduction}
+\section{Variational Autoencoders}
 
+\subsection{Autoencoders}
+
+Given data vectors $\bm{x} \in \R^d$, we may want to extract lower dimensional representations $\bm z \in \R^m$ that can be reconstructed via $\bm{\hat x}$ to approximate $\bm x$.
+
+\subsection{Variational Autoencoders}
+
+Instead of learning a simplistic compressed representation, we may want to constrain latents to approximate a density. If we were able to sample latents $\bm z$, and after learning correct representations, we should in theory be able to generate new $\bm x$.
+The term \textit{variational} autoencoder refers to the idea of learning the parameters of a \textit{distribution} representing latents $\bm z$. In this case, we 
+
+
+\subsubsection{Joint Model}
+Consider the probabilistic model
+$$
+	p_\theta(\bm z, \bm x) =  p_\theta(\bm x \mid \bm z) p_\theta(\bm z)
+$$
+In this case, $\theta$ parametrizes the distribution of $\bm x$ given the latents $\bm z$ through a decoder network. 
+
+\begin{example}
+	$p_\theta(\bm x \mid \bm z) = \prod_{d=1}^D \text{Ber}(\bm x_d \mid \sigma (d_\theta(z)))$
+\end{example}
+This can be interpreted as fixing that nearby points in a Gaussian density around $\bm z$ should map to the same output $\bm z$. As we will later see, VAEs can simply be interpreted as regularized autoencoders.
+\subsubsection{Recognition model}
+We additionally fit a recognition model for the latents
+$$
+	q_\phi(\bm z \mid \bm x) = q(z \mid e_\phi(\bm x))
+$$	
+This can be used to parametrize the distribution of the latents as depending on the input $\bm x$.
+can be used to parametrize the mean and standard dev. of a Gaussian representing the most likely $\bm x$ from the latent representation $\bm z$. In addition to this decoder, we fit a \textit{recognition} network in order to approximate the posterior
+$$
+	q_\phi(\bm z \mid \bm x) = q(\bm z \mid e_\phi(\bm x))  \approx p_\theta(\bm z \mid \bm x)
+$$
+\subsubsection{Learning}
+Suppose we want to maximize the log-likelihood of $\theta, \phi$ given observations $\{\bm x _i \}_{i=1}^N$. 
 
 \end{document}
